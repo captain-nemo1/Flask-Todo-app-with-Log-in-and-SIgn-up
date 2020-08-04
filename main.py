@@ -73,22 +73,27 @@ def index(id): #To DO page
         found=0
         todo=[]
         for task in tasks:
-            print(task.user_id)
             if task.user_id == int(id):
                 todo.append(task)   
                 found=1
         if found == 1:
             return render_template('data.html', tasks=todo, user_id=id)
-        return render_template('data.html', u)
+        return render_template('data.html', user_id=id)
         
 
 
-@app.route('/delete/<int:id>')
-def delete(id):
-    task_to_delete = Todo.query.get_or_404(id)
+@app.route('/delete/<int:id>/<int:cur_id>/<string:content>')
+def delete(id,cur_id,content):
+    tasks = Todo.query.order_by(Todo.date_created).all()
+    cur_task=[]
+    cur_content=[]
 
+    for task in tasks:
+        if task.user_id ==id:
+            cur_task.append(task)
+            cur_content.append(task.content)
     try:
-        db.session.delete(task_to_delete)
+        db.session.delete(cur_task[cur_content.index(content)])
         db.session.commit()
         return redirect('/data/'+str(id))
     except:
@@ -98,12 +103,10 @@ def delete(id):
 
 @app.route('/update/<int:id>/<int:cur_id>/<string:content>', methods=['GET', 'POST'])
 def update(id,cur_id,content):
-   # task = Todo.query.get_or_404(id)
     tasks = Todo.query.order_by(Todo.date_created).all()
     cur_task=[]
     cur_content=[]
-    cur_index=-1
-    c=0
+
     for task in tasks:
         if task.user_id ==id:
             cur_task.append(task)
