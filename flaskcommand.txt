@@ -1,0 +1,8 @@
+ py -3 -m venv venv
+ > venv\Scripts\activate
+
+$env:Flask_ENV = "MyAPP.py"
+
+$env:Flask_ENV = "development"
+
+python -m flask run

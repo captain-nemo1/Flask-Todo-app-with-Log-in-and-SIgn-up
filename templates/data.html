@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">TO DO</h1>
+    {% for task in tasks%}
+    <table>
+        <tr>
+            <th>Task </th>
+            <th>Added </th>
+            <th>Actions</th>
+        </tr>
+            <tr>
+                <td>{{task.content}}</td>
+                <td>{{task.date_created}}</td>
+                <td>
+                    <a href="/delete/{{user_id}}/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{user_id}}/{{task.id}}/{{task.content}}">Update</a>
+                </td>
+            </tr>
+    </table>
+    {% endfor %}
+    <div class="form">
+        <form action="/data/{{user_id}}" method="POST">
+            <div class="input">
+            <input type="text" name="content" id="content">
+            </div>
+            <div class="submit">
+            <input type="submit" value="Add Task" id="submit">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

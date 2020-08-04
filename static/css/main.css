@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+.content {
+    margin: 0 auto;
+    width: 250px;
+    position: relative;
+}
+
+table, td, th {
+    border: 1px solid #aaa;
+    padding: 2px;
+}
+.form{
+    margin-top: 15px;
+    margin-left: 45px;
+    position: absolute  ;
+}
+
+.submit{
+    position: absolute;
+    top: 120%;
+}

@@ -1,0 +1,20 @@
+{% extends 'login.html' %}
+
+{% block body %}
+    <h1>Login</h1>
+    <div class="form">
+        <form action="/" method="POST">
+            <input type="text" name="content" id="name"><br><br>
+            <input type="text" name="pass" id="pass">
+            <input type="submit" value="Login" id="submit">
+        </form>
+    </div>
+    <h1>Sign Up</h1>
+    <div class="form">
+        <form action="/" method="POST">
+            <input type="text" name="signcontent" id="name"><br><br>
+            <input type="text" name="signpass" id="pass">
+            <input type="submit" value="Sign In" id="submit">
+        </form>
+    </div>
+{% endblock  %}
