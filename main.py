@@ -46,7 +46,7 @@ def mainPage():
             new_User= Users(username=userName,password=password)
             users = Users.query.order_by(Users.date_created).all()
             for user in users:
-                if  user.username == userName and user.password == user.password:
+                if  user.username == userName and user.password == password:
                     found=1
                     return redirect('/data/'+str(user.id))
                     break
@@ -79,7 +79,7 @@ def index(id): #To DO page
                 found=1
         if found == 1:
             return render_template('data.html', tasks=todo, user_id=id)
-        return render_template('data.html', user_id=id)
+        return render_template('data.html', u)
         
 
 
@@ -101,20 +101,17 @@ def update(id,cur_id,content):
    # task = Todo.query.get_or_404(id)
     tasks = Todo.query.order_by(Todo.date_created).all()
     cur_task=[]
+    cur_content=[]
     cur_index=-1
     c=0
     for task in tasks:
-        if task.user_id==int(id):
+        if task.user_id ==id:
             cur_task.append(task)
-            c+=1
-            if(task.content==content):
-                cur_index=c
+            cur_content.append(task.content)
 
-
-    print(str(cur_index)+content)       
 
     if request.method == 'POST':
-        task.content = request.form['content']  
+        cur_task[cur_content.index(content)].content = request.form['content']  
 
         try:
             db.session.commit()
@@ -123,7 +120,7 @@ def update(id,cur_id,content):
             return 'There was an issue updating your task'
 
     else:
-        return render_template('update.html', task=cur_task[cur_index], user_id=id)
+        return render_template('update.html', task=cur_task[cur_content.index(content)], user_id=id)
 
 
 if __name__ == "__main__":

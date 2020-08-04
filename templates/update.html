@@ -9,7 +9,7 @@
     <h2>Enter New Value Here</h2>
     {% block body%}
     <div class="form">
-        <form action="/update/{{user_id}}" method="POST">
+        <form action="/update/{{user_id}}/{{task.id}}/{{task.content}}" method="POST">
             <input type="text" name="content" id="content" value="{{task.content}}">
             <input type="submit" value="Update">
         </form>
